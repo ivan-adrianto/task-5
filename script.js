@@ -12,7 +12,7 @@ const getFirstName = () => {
 const getLastName = () => {
   return new Promise ((resolve, reject) => {
       setTimeout (()=> {
-          return (true) ?
+          return (false) ?
           resolve (`Academy`) : reject(Error("Gagal"))
       }, 3000)
   })
@@ -24,7 +24,10 @@ const fromModule = () => {
       const [getFirstName, getLastName] = response
       document.querySelector("#fromModule").innerText = `${getFirstName} ${getLastName}` }
   )
-  .catch (error => console.log (error))
+  .catch((error) => {console.log(error);
+    document.querySelector("#fromModule").innerText=error;
+  }
+  );
 }
 
 
@@ -102,25 +105,38 @@ const getUser = (id, callback) => {
     document.querySelector("#hasil1").innerText=result.message
     console.log(result)
     })
-    .catch((error) =>console.log(error));
+    .catch((error) => {console.log(error);
+      document.querySelector("#hasil1").innerText=error;
+    }
+    );
   }
 
   const promiseAll = () => {
     console.log("Clicked...")
-    Promise.all([getUser1(8)])
+    Promise.all([getUser1(false)])
     .then((result) => {
     document.querySelector("#hasil2").innerText=`${result[0].message}`
     console.log(result) 
     })
-    .catch((error) =>console.log(error));
+    .catch((error) => {console.log(error);
+      document.querySelector("#hasil2").innerText=error;
+    }
+    );
+    
   }
 
   const asycnAwait = async () => {
     console.log("Clicked...")
-    const result = await getUser1(6); 
+    try {
+      const result = await getUser1(undefined); 
     document.querySelector("#hasil3").innerText=result.message
     console.log(result)
-    }
+  } catch (error) {
+    document.querySelector("#hasil3").innerText=error;
+    console.log(error)
+  }
+    
+  }
   // 1. Ubah studi kasus di modul pakai Promise.all
   // - Pelajari Promise.all
   // - https://medium.com/coderupa/panduan-komplit-asynchronous-programming-pada-javascript-part-3-promise-819ce5d8b3c

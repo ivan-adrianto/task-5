@@ -72,7 +72,7 @@ const getUser = (id, callback) => {
     return new Promise((resolve, reject)=>
     setTimeout(() => {
         if (!id) {
-          return callback(Error("Invalid ID"))
+          return reject(Error("Invalid ID"))
         }
     
         let response;

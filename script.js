@@ -1,3 +1,37 @@
+// Soal 1. Dari modul diubah ke Promise All//
+
+const getFirstName = () => {
+  const promise = new Promise ((resolve, reject) => {
+      setTimeout (() => {
+          return (true) ?
+          resolve ("Binar") : reject (Error("Gagal"))
+  }, 3000);
+}); return promise
+};
+
+const getLastName = () => {
+  return new Promise ((resolve, reject) => {
+      setTimeout (()=> {
+          return (true) ?
+          resolve (`Academy`) : reject(Error("Gagal"))
+      }, 3000)
+  })
+}
+
+const fromModule = () => {
+  Promise.all ([getFirstName(), getLastName()])
+  .then (response => {
+      const [getFirstName, getLastName] = response
+      document.querySelector("#fromModule").innerText = `${getFirstName} ${getLastName}` }
+  )
+  .catch (error => console.log (error))
+}
+
+
+
+
+// Soal Nomor 2 
+
 const getUser = (id, callback) => {
     setTimeout(() => {
       if (!id) {
@@ -34,7 +68,6 @@ const getUser = (id, callback) => {
     })
   }
 
-
   const getUser1 = (id) => {
     return new Promise((resolve, reject)=>
     setTimeout(() => {
@@ -64,7 +97,7 @@ const getUser = (id, callback) => {
 
   const promiseChaining = () => {
     console.log("Clicked...")
-    getUser1(11) 
+    getUser1(undefined) 
     .then((result) => {
     document.querySelector("#hasil1").innerText=result.message
     console.log(result)
